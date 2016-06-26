@@ -17,6 +17,17 @@ module.exports = new Script({
                 .then(() => 'speak');
         }
     },
+    
+        askName: {
+        prompt: (bot) => bot.say('What\'s your name?'),
+        receive: (bot, message) => {
+            const name = message.text;
+            return bot.setProp('name', name)
+                .then(() => bot.say(`Great! I'll call you ${name}
+Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
+                .then(() => 'speak');
+        }
+    },
 
     speak: {
         receive: (bot, message) => {
